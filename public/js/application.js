@@ -1,7 +1,14 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $("form").submit(function(event) {
+    event.preventDefault();
+    $("#grandma").show();
+    $("#grandma_says").html = "";
+
+    var say_to_grandma = $("input:first").val();
+
+    $.post("/grandma/", say_to_grandma, function (data) {
+      $("#grandma_says")[0].innerHTML = data;
+    });
+  });
 });
